@@ -20,6 +20,19 @@ public class Java8Problems {
         //14.Find second largest number in an integer array?
         List<Integer> list14 = Arrays.asList(45, 12, 56, 15, 24, 75, 31, 89);
         java.secondLargest(list14);
+
+        //15.Given a list of strings, sort them according to increasing order of their length?
+        List<String> list15 = Arrays.asList("Java", "Python", "C#", "HTML", "Kotlin", "C++", "COBOL", "C");
+        java.sortAsc(list15);
+    }
+
+    private void sortAsc(List<String> words) {
+        List<String> sortedList = words
+                .stream()
+                .sorted(Comparator.comparing(String::length))
+                .toList();
+
+        System.out.println("sortedList: "+sortedList);
     }
 
     private void secondLargest(List<Integer> numbers) {
