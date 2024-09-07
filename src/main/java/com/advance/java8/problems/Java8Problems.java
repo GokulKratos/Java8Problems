@@ -40,6 +40,32 @@ public class Java8Problems {
         //18.Reverse each word of a string using Java 8 streams?
         String str18 = "Java Concept Of The Day";
         java.reverseEachString(str18);
+
+        //19.How do you find sum of first 10 natural numbers?
+        java.sumOfNaturalNumbers();
+
+        //20.Reverse an integer array
+        int[] arr20 = new int[] {5, 1, 7, 3, 9, 6};
+        java.reverseIntegerArr(arr20);
+    }
+
+    private void reverseIntegerArr(int[] numbers) {
+        int[] arr = IntStream.iterate(numbers.length-1, i -> i >= 0 , i -> i-1)
+                .map(a->numbers[a])
+                .toArray();
+        System.out.println(Arrays.toString(arr));
+    }
+
+    private void sumOfNaturalNumbers() {
+        //normal
+        Integer sum = IntStream.range(1,11)
+                .sum();
+        System.out.println("sum of first 10 natural numbers: "+sum);
+
+        //optimized
+        int n=10;
+        Integer sumOptmized = ((n) * (n+1)) / 2;
+        System.out.println("sumOptmized of first 10 natural numbers: "+sumOptmized);
     }
 
     private void reverseEachString(String words) {
