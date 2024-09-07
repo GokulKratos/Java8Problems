@@ -8,4 +8,4 @@
 17) How do you find common elements between two arrays?
 18) Reverse each word of a string using Java 8 streams?
 19) How do you find sum of first 10 natural numbers?
-20) Reverse an integer array
+20) Reverse an integer array?
