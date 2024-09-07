@@ -24,6 +24,25 @@ public class Java8Problems {
         //15.Given a list of strings, sort them according to increasing order of their length?
         List<String> list15 = Arrays.asList("Java", "Python", "C#", "HTML", "Kotlin", "C++", "COBOL", "C");
         java.sortAsc(list15);
+
+        //16.Given an integer array, find sum and average of all elements?
+        int[] arr16 = new int[] {45, 12, 56, 15, 24, 75, 31, 89};
+        java.sumAndAvg(arr16);
+
+    }
+
+    private void sumAndAvg(int[] numbers) {
+        Integer sum = Arrays.stream(numbers)
+                .reduce(0,Integer::sum);
+        Integer avg = sum / numbers.length;
+
+        System.out.println("sum: "+sum+" avg:"+avg);
+
+        //optimized
+        Integer sumOptimized = Arrays.stream(numbers).sum();
+        Double avgOptimized = Arrays.stream(numbers).average().getAsDouble();
+
+        System.out.println("sumOptimized: "+sumOptimized+" avgOptimized:"+avgOptimized);
     }
 
     private void sortAsc(List<String> words) {
