@@ -12,3 +12,6 @@
 21) Print first 10 even numbers?
 22) How do you find the most repeated element in an array?
 23) Palindrome program using Java 8 streams?
+24) Given a list of strings, find out those strings which start with a number?
+25) How do you extract duplicate elements from an array?
+26) Print duplicate characters in a string?

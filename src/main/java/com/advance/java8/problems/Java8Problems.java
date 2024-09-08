@@ -42,7 +42,7 @@ public class Java8Problems {
         java.sumOfNaturalNumbers();
 
         //20.Reverse an integer array
-        int[] arr20 = new int[] {5, 1, 7, 3, 9, 6};
+        int[] arr20 = new int[]{5, 1, 7, 3, 9, 6};
         java.reverseIntegerArr(arr20);
 
         //21.Print first 10 even numbers
@@ -55,12 +55,64 @@ public class Java8Problems {
         //23.Palindrome program using Java 8 streams
         String word23 = "ROTATOR";
         java.isPalidromeOrNot(word23);
+
+        //24.Given a list of strings, find out those strings which start with a number?
+        List<String> list24 = Arrays.asList("One", "2wo", "3hree", "Four", "5ive", "Six");
+        java.startWithNumber(list24);
+
+        //25.How do you extract duplicate elements from an array?
+        List<Integer> list25 = Arrays.asList(111, 222, 333, 111, 555, 333, 777, 222);
+        java.extractDuplicates(list25);
+
+        //26.Print duplicate characters in a string?
+        String str26 = "Java Concept Of The Day".replaceAll("\\s+", "").toLowerCase();
+        java.duplicatesInString(str26);
+    }
+
+    private void duplicatesInString(String word) {
+        Set<String> set = new HashSet<>();
+        Set<String> duplicateSet = Arrays.stream(word.split(""))
+                .filter(str -> !set.add(str))
+                .collect(Collectors.toSet());
+        System.out.println("duplicateSet: "+duplicateSet);
+    }
+
+    private void extractDuplicates(List<Integer> numbers) {
+        List<Integer> duplicatesList = numbers.stream()
+                .collect(Collectors.groupingBy(Function.identity()))
+                .entrySet()
+                .stream()
+                .filter(entry -> entry.getValue().size() > 1)
+                .map(Map.Entry::getKey)
+                .toList();
+        System.out.println("duplicatesList: " + duplicatesList);
+
+        //optimized
+        Set<Integer> set = new HashSet<>();
+        numbers.stream()
+                .filter(number -> !set.add(number))
+                .collect(Collectors.toSet());
+        System.out.println("duplicatesListOptimized: " + duplicatesList);
+    }
+
+    private void startWithNumber(List<String> words) {
+        List<String> numbers = Arrays.asList("0", "1", "2", "3", "4", "5", "6", "7", "8", "9");
+        List<String> startWithNumbers = words.stream()
+                .filter(word -> numbers.contains(String.valueOf(word.charAt(0))))
+                .toList();
+        System.out.println("startWithNumbers: " + startWithNumbers);
+
+        //optimized
+        List<String> startWithNumbersOptimized = words.stream()
+                .filter(word -> Character.isDigit(word.charAt(0)))
+                .toList();
+        System.out.println("startWithNumbersOptimized: " + startWithNumbersOptimized);
     }
 
     private void isPalidromeOrNot(String word) {
-        Boolean isPalindrome = IntStream.range(0,word.length()/2)
-                .noneMatch(i -> word.charAt(i) != word.charAt(word.length()-i-1));
-        System.out.println("isPalindrome: "+isPalindrome);
+        Boolean isPalindrome = IntStream.range(0, word.length() / 2)
+                .noneMatch(i -> word.charAt(i) != word.charAt(word.length() - i - 1));
+        System.out.println("isPalindrome: " + isPalindrome);
     }
 
     private void mostRepeatedElement(List<String> words) {
@@ -75,39 +127,39 @@ public class Java8Problems {
     }
 
     private void first10EvenNumbers() {
-        IntStream.iterate(2,i->i<21,i->i+2)
+        IntStream.iterate(2, i -> i < 21, i -> i + 2)
                 .forEach(System.out::println);
 
         //optimized
-        IntStream.rangeClosed(1,10)
-                .map(i->i*2)
+        IntStream.rangeClosed(1, 10)
+                .map(i -> i * 2)
                 .forEach(System.out::println);
     }
 
     private void reverseIntegerArr(int[] numbers) {
-        int[] arr = IntStream.iterate(numbers.length-1, i -> i >= 0 , i -> i-1)
-                .map(a->numbers[a])
+        int[] arr = IntStream.iterate(numbers.length - 1, i -> i >= 0, i -> i - 1)
+                .map(a -> numbers[a])
                 .toArray();
         System.out.println(Arrays.toString(arr));
     }
 
     private void sumOfNaturalNumbers() {
         //normal
-        Integer sum = IntStream.range(1,11)
+        Integer sum = IntStream.range(1, 11)
                 .sum();
-        System.out.println("sum of first 10 natural numbers: "+sum);
+        System.out.println("sum of first 10 natural numbers: " + sum);
 
         //optimized
-        int n=10;
-        Integer sumOptmized = ((n) * (n+1)) / 2;
-        System.out.println("sumOptmized of first 10 natural numbers: "+sumOptmized);
+        int n = 10;
+        Integer sumOptmized = ((n) * (n + 1)) / 2;
+        System.out.println("sumOptmized of first 10 natural numbers: " + sumOptmized);
     }
 
     private void reverseEachString(String words) {
-        String result= Arrays.stream(words.split(" "))
+        String result = Arrays.stream(words.split(" "))
                 .map(word -> new StringBuilder(word).reverse())
-                        .collect(Collectors.joining(" "));
-        System.out.println("reverseEachString: "+result);
+                .collect(Collectors.joining(" "));
+        System.out.println("reverseEachString: " + result);
     }
 
     private void commonElements(List<Integer> numbers1, List<Integer> numbers2) {
@@ -131,7 +183,7 @@ public class Java8Problems {
         //optimized
         numbers1.stream()
                 .filter(numbers2::contains)
-                .forEach(num-> {
+                .forEach(num -> {
                     System.out.print(num + ",");
                 });
     }
