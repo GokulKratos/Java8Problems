@@ -9,3 +9,6 @@
 18) Reverse each word of a string using Java 8 streams?
 19) How do you find sum of first 10 natural numbers?
 20) Reverse an integer array?
+21) Print first 10 even numbers?
+22) How do you find the most repeated element in an array?
+23) Palindrome program using Java 8 streams?

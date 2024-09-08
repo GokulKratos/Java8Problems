@@ -1,9 +1,6 @@
 package com.advance.java8.problems;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -47,6 +44,44 @@ public class Java8Problems {
         //20.Reverse an integer array
         int[] arr20 = new int[] {5, 1, 7, 3, 9, 6};
         java.reverseIntegerArr(arr20);
+
+        //21.Print first 10 even numbers
+        java.first10EvenNumbers();
+
+        //22.How do you find the most repeated element in an array?
+        List<String> list22 = Arrays.asList("Pen", "Eraser", "Note Book", "Pen", "Pencil", "Pen", "Note Book", "Pencil");
+        java.mostRepeatedElement(list22);
+
+        //23.Palindrome program using Java 8 streams
+        String word23 = "ROTATOR";
+        java.isPalidromeOrNot(word23);
+    }
+
+    private void isPalidromeOrNot(String word) {
+        Boolean isPalindrome = IntStream.range(0,word.length()/2)
+                .noneMatch(i -> word.charAt(i) != word.charAt(word.length()-i-1));
+        System.out.println("isPalindrome: "+isPalindrome);
+    }
+
+    private void mostRepeatedElement(List<String> words) {
+        String repeatedElement = words.stream()
+                .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()))
+                .entrySet()
+                .stream()
+                .max(Comparator.comparing(Map.Entry::getValue))
+                .get()
+                .getKey();
+        System.out.println(repeatedElement);
+    }
+
+    private void first10EvenNumbers() {
+        IntStream.iterate(2,i->i<21,i->i+2)
+                .forEach(System.out::println);
+
+        //optimized
+        IntStream.rangeClosed(1,10)
+                .map(i->i*2)
+                .forEach(System.out::println);
     }
 
     private void reverseIntegerArr(int[] numbers) {
