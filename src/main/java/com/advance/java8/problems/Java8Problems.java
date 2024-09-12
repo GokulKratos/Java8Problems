@@ -1,5 +1,7 @@
 package com.advance.java8.problems;
 
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.*;
 import java.util.function.BiFunction;
 import java.util.function.Function;
@@ -67,6 +69,94 @@ public class Java8Problems {
         //26.Print duplicate characters in a string?
         String str26 = "Java Concept Of The Day".replaceAll("\\s+", "").toLowerCase();
         java.duplicatesInString(str26);
+
+        //27.Find first repeated character in a string?
+        String str27 = "Java Concept Of The Day".replaceAll("\\s+", "").toLowerCase();
+        java.firstRepeatedCharacter(str27);
+
+        //28.Find first non-repeated character in a string?
+        String str28 = "Java Concept Of The Day".replaceAll("\\s+", "").toLowerCase();
+        java.firstNonRepeatedCharacter(str28);
+
+        //29.Fibonacci series?
+        java.fibonacciSeries();
+
+        //30.First 10 odd numbers?
+        java.findFirstTenOddNumbers();
+
+        //31.How do you get last element of an array?
+        List<String> list31 = Arrays.asList("One", "Two", "Three", "Four", "Five", "Six");
+        java.findLastElement(list31);
+
+        //32. Find the age of a person in years if the birthday has given?
+        LocalDate birthDay = LocalDate.of(1985, 01, 23);
+        java.findAge(birthDay);
+    }
+
+    private void findAge(LocalDate birthDay) {
+        LocalDate today = LocalDate.now();
+        System.out.println("Age: "+ChronoUnit.YEARS.between(birthDay, today)+" years");
+    }
+
+    private void findLastElement(List<String> words) {
+        String word = words.stream()
+                .skip(words.size() - 1)
+                .findFirst()
+                .get();
+        System.out.println("\nlast element of an array: "+ word);
+    }
+
+    private void findFirstTenOddNumbers() {
+        System.out.println();
+        System.out.println("First 10 odd numbers: ");
+        IntStream.rangeClosed(0,9)
+                .map(result -> (2*result) + 1)
+                .forEach(result -> System.out.print(result+","));
+
+        //optimized
+        Stream.iterate(new int[] {1,3}, f-> new int[] {f[1],f[1]+2})
+                .limit(10)
+                .map(a->a[0])
+                .forEach(result -> System.out.print(result+","));
+    }
+
+    private void fibonacciSeries() {
+        System.out.print("Fibonacci Series:");
+        Stream.iterate(new int[] {0,1}, f -> new int[] {f[1], f[0]+f[1]})
+                .limit(10)
+                .map(f->f[0])
+                .forEach(result -> System.out.print(result+", "));
+    }
+
+    private void firstNonRepeatedCharacter(String word) {
+        String ch = Arrays.stream(word.split(""))
+                .collect(Collectors.groupingBy(Function.identity(), LinkedHashMap::new, Collectors.counting()))
+                .entrySet()
+                .stream()
+                .filter(entry -> entry.getValue() <= 1)
+                .findFirst()
+                .get()
+                .getKey();
+        System.out.println("non-repeated character: "+ ch);
+    }
+
+    private void firstRepeatedCharacter(String word) {
+        Set<String> set = new HashSet<>();
+        String repeated = Arrays.stream(word.split(""))
+                .filter(str -> !set.add(str))
+                .findFirst().get();
+        System.out.println("repeated: "+repeated);
+
+        //another way
+        String repeatedChar = Arrays.stream(word.split(""))
+                .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()))
+                .entrySet()
+                .stream()
+                .filter(entry -> entry.getValue() > 1)
+                .findFirst()
+                .get()
+                .getKey();
+        System.out.println("repeatedChar: "+repeatedChar);
     }
 
     private void duplicatesInString(String word) {

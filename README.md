@@ -15,3 +15,9 @@
 24) Given a list of strings, find out those strings which start with a number?
 25) How do you extract duplicate elements from an array?
 26) Print duplicate characters in a string?
+27) Find first repeated character in a string?
+28) Find first non-repeated character in a string?
+29) Fibonacci series?
+30) First 10 odd numbers?
+31) How do you get last element of an array?
+32) Find the age of a person in years if the birthday has given?
