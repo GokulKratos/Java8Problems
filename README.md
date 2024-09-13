@@ -2,6 +2,17 @@
 <details>
   <summary>Java 8 Problems</summary>
 
+1. Given a list of integers, separate odd and even numbers?
+2. How do you remove duplicate elements from a list using Java 8 streams?
+3. How do you find frequency of each character in a string using Java 8 streams?
+4. How do you find frequency of each element in an array or a list?
+5. How do you sort the given list of decimals in reverse order?
+6. Given a list of strings, join the strings with ‘[‘ as prefix, ‘]’ as suffix and ‘,’ as delimiter?
+7. From the given list of integers, print the numbers which are multiples of 5?
+8. Given a list of integers, find maximum and minimum of those numbers?
+9. How do you merge two unsorted arrays into single sorted array using Java 8 streams?
+10. How do you merge two unsorted arrays into single sorted array without duplicates?
+11. How do you get three maximum numbers and three minimum numbers from the given list of integers?
 12. Java 8 program to check if two strings are anagrams or not?
 13. Find sum of all digits of a number in Java 8?
 14. Find second largest number in an integer array?
