@@ -1,6 +1,7 @@
 # JAVA PROBLEMS
 <details>
   <summary>Java 8 Problems</summary>
+Execution Class : Java8Problems
 
 1. Given a list of integers, separate odd and even numbers?
 2. How do you remove duplicate elements from a list using Java 8 streams?
@@ -39,6 +40,7 @@
 
 <details>
   <summary>Solving Real Time Queries Using Java 8 Features - Employee Management System</summary>
+Execution Class : EMSservice
 
 1. How many male and female employees are there in the organization?
 2. Print the name of all departments in the organization?
