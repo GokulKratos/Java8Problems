@@ -1,4 +1,6 @@
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 public class SlidingWindow {
 
@@ -17,6 +19,115 @@ public class SlidingWindow {
 		// Max Consecutive Ones III
 		int[] nums = { 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 0 };
 		sw.maxOnes(nums, 2);
+
+		// Fruits into baskets
+		int[] trees = { 1, 0, 1, 4, 1, 4, 1, 2, 3 };
+		sw.findFruits(trees);
+
+		// Longest Substring With At Most K Distinct Characters
+		String s1 = "aaabbccd";
+		sw.longestSubstringWihKDistinctChar(s1);
+
+		// Number of Substrings Containing All Three Characters
+		String s2 = "abcabc";
+		sw.noOfSubstringAllThreeChar(s2);
+
+		// Longest Repeating Character Replacement
+		String s3 = "AABABBA";
+		sw.longestRepeatingChar(s3, 2);
+	}
+
+	private void longestRepeatingChar(String s, int k) {
+		int l = 0;
+		int r = 0;
+		int max = 0;
+		int[] hash = new int[26];
+		int maxFrequency = 0;
+		int noOfConversions = 0;
+		int n = s.length();
+
+		while (r < n) {
+			hash[s.charAt(r) - 'A']++;
+			maxFrequency = Math.max(maxFrequency, hash[s.charAt(r) - 'A']);
+			noOfConversions = (r - l + 1) - maxFrequency;
+
+			if (noOfConversions > k) {
+				hash[s.charAt(l) - 'A']--;
+				l++;
+				maxFrequency = Math.max(maxFrequency, hash[s.charAt(l) - 'A']);
+				noOfConversions = (r - l + 1) - maxFrequency;
+			}
+
+			if (noOfConversions <= k) {
+				max = Math.max(max, r - l + 1);
+			}
+			r++;
+		}
+		System.out.println("Longest Repeating Character Replacement: " + max);
+	}
+
+	private void longestSubstringWihKDistinctChar(String s) {
+		int l = 0;
+		int r = 0;
+		int max = 0;
+		int k = 2;
+		int n = s.length();
+
+		Map<Character, Integer> map = new HashMap<>();
+
+		while (r < n) {
+			map.merge(s.charAt(r), 1, (a, b) -> a + b);
+
+			if (map.size() > k) {
+				map.merge(s.charAt(l), 1, (a, b) -> a - b);
+				if (map.get(s.charAt(l)) <= 0) {
+					map.remove(s.charAt(l));
+				}
+				l++;
+			}
+			if (map.size() <= k) {
+				max = Math.max(max, r - l + 1);
+			}
+			r++;
+		}
+		System.out.println("max: " + max);
+	}
+
+	private void noOfSubstringAllThreeChar(String s) {
+		int[] hash = { -1, -1, -1 };
+		int count = 0;
+		for (int i = 0; i < s.length(); i++) {
+			hash[s.charAt(i) - 'a'] = i;
+			count = count + (Math.min(hash[0], Math.min(hash[1], hash[2])) + 1);
+		}
+		System.out.println("Number of Substrings Containing All Three Characters: " + count);
+	}
+
+	private void findFruits(int[] trees) {
+		int l = 0;
+		int r = 0;
+		int max = 0;
+		int k = 2;
+		int n = trees.length;
+
+		Map<Integer, Integer> map = new HashMap<>();
+
+		while (r < n) {
+			map.merge(trees[r], 1, (a, b) -> a + b);
+
+			if (map.size() > k) {
+				map.merge(trees[l], 1, (a, b) -> a - b);
+				if (map.get(trees[l]) <= 0) {
+					map.remove(trees[l]);
+				}
+				l++;
+			}
+			if (map.size() <= k) {
+				max = Math.max(max, r - l + 1);
+			}
+			r++;
+		}
+		System.out.println("max: " + max);
 	}
 
 	private void maxOnes(int[] nums, int k) {
