@@ -1,6 +1,9 @@
+
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public class SlidingWindow {
 
@@ -35,6 +38,163 @@ public class SlidingWindow {
 		// Longest Repeating Character Replacement
 		String s3 = "AABABBA";
 		sw.longestRepeatingChar(s3, 2);
+
+		// Binary Subarrays With Sum
+		int[] binArr = { 1, 0, 0, 1, 1, 0 };
+		int goal = 2;
+		int count = sw.binarySubarrayCount(binArr, goal) - sw.binarySubarrayCount(binArr, goal - 1);
+		System.out.println("No of Binary Subarrays With Sum: " + count);
+
+		sw.binarySubarrayCountBruteForce(binArr, 2);
+
+		//Count number of Nice subarrays
+		int[] nums10 = { 1, 1, 2, 1, 1 };
+		int k10 = 3;
+		System.out.println(sw.numberOfSubarrays(nums10, k10));
+		
+		//Subarrays with K Different Integers
+		int[] nums11 = { 1, 1, 2, 1, 1 };
+		int k11 = 3;
+		System.out.println(sw.subarraysWithKDistinctFunc(nums11, k11));
+		
+		//Minimum Window Substring
+		String word12= "cabwefgewcwaefgcf";
+		String t = "cae";
+		System.out.println(sw.minWindowSubstring(word12,t));
+	}
+
+	private String minWindowSubstring(String s, String t) {
+		if(s.length() < t.length()) {
+			return "";
+		}
+		
+		int l=0;
+		int r=0;
+		int count=0;
+		int min=Integer.MAX_VALUE;
+		int start = -1;
+		
+		Map<Character, Long> map = t.chars().mapToObj(a->(char)a)
+				.collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+		
+		while(r<s.length()) {
+			if(map.containsKey(s.charAt(r))) {
+				if(map.getOrDefault(s.charAt(r), -1l) > 0) {
+					count++;
+				} 
+				map.merge(s.charAt(r), 1l, (a,b)->a-b);
+			}
+			
+			while(count == t.length()) {
+				int temp = r-l+1;
+				if(temp < min) {
+					min = temp;
+					start=l;
+				}
+				if(map.containsKey(s.charAt(l))) {
+					map.merge(s.charAt(l),1l,(a,b)->a+b);
+				}
+				
+				if(map.getOrDefault(s.charAt(l), -1l)>0) {
+					count--;
+				}
+				l++;
+			}
+			r++;
+		}
+		return start==-1 ? "" :  s.substring(start, start+min);
+	}
+
+	public int subarraysWithKDistinct(int[] nums, int k) {
+        return subarraysWithKDistinctFunc(nums,k) - subarraysWithKDistinctFunc(nums,k-1);
+    }
+
+    public int subarraysWithKDistinctFunc(int[] arr, int k) {
+        int l=0;
+        int r=0;
+        int count=0;
+        Map<Integer,Integer> map = new HashMap<>();
+
+        while(r<arr.length){
+            map.put(arr[r], map.getOrDefault(arr[r],0) + 1);
+
+            while(map.size() > k){
+                map.put(arr[l], map.get(arr[l]) - 1);
+                if(map.get(arr[l]) <= 0){
+                    map.remove(arr[l]);
+                }
+                l++;
+            }
+
+            count=count+(r-l+1);
+            r++;
+        }
+        return count;
+    }
+    
+	public int numberOfSubarrays(int[] nums, int k) {
+		return numberOfSubarraysFunc(nums, k) - numberOfSubarraysFunc(nums, k - 1);
+	}
+
+	public int numberOfSubarraysFunc(int[] nums, int k) {
+		if (k < 0) {
+			return 0;
+		}
+		int l = 0;
+		int r = 0;
+		int n = nums.length;
+		int count = 0;
+		int nice = 0;
+
+		while (r < n) {
+			count += nums[r] % 2;
+			while (count > k) {
+				count -= nums[l] % 2;
+				l++;
+			}
+			nice = nice + (r - l + 1);
+			r++;
+		}
+		return nice;
+	}
+
+	private void binarySubarrayCountBruteForce(int[] nums, int goal) {
+		int sum = 0;
+		int count = 0;
+		for (int i = 0; i < nums.length; i++) {
+			sum = 0;
+			for (int j = i; j < nums.length; j++) {
+				sum = sum + nums[j];
+				if (sum == goal) {
+					count++;
+				}
+			}
+		}
+		System.out.println("count brute force: " + count);
+	}
+
+	private int binarySubarrayCount(int[] nums, int goal) {
+		if (goal <= 0) {
+			return 0;
+		}
+		int l = 0;
+		int r = 0;
+		int count = 0;
+		int sum = 0;
+
+		while (r < nums.length) {
+			sum += nums[r];
+
+			while (sum > goal) {
+				sum -= nums[l];
+				l++;
+			}
+
+			count += (r - l + 1);
+			r++;
+		}
+		System.out.println("count" + count);
+		return count;
 	}
 
 	private void longestRepeatingChar(String s, int k) {
