@@ -62,6 +62,66 @@ public class SlidingWindow {
         String word12= "cabwefgewcwaefgcf";
         String t = "cae";
         System.out.println(sw.minWindowSubstring(word12,t));
+
+        //12.Maximum Sum of Distinct Subarrays With Length K
+        int[] nums12 = {1,5,4,2,9,9,9};
+        int k12 = 3;
+        System.out.println("12.Maximum Sum of Distinct Subarrays With Length K: "+ sw.maximumSubarraySum(nums12, k12));
+
+        //13.Maximum Length Substring With Two Occurrences
+        String s13 = "bcbbbcba";
+        int k13=2;
+        System.out.println("13.Maximum Length Substring With Two Occurrences: "+sw.maximumLengthSubstring(s13,k13));
+    }
+
+    public int maximumLengthSubstring(String s, int k) {
+        int l=0;
+        int r=0;
+        int n=s.length();
+        int max=0;
+        Map<Character,Integer> map = new HashMap<>();
+
+        while(r<n){
+            map.put(s.charAt(r), map.getOrDefault(s.charAt(r),0)+1);
+
+            while(map.get(s.charAt(r)) > k){
+                map.put(s.charAt(l), map.getOrDefault(s.charAt(l),0)-1);
+                l++;
+            }
+
+            max = Math.max(max,r-l+1);
+            r++;
+        }
+        return max;
+    }
+
+    private long maximumSubarraySum(int[] nums, int k) {
+        int l=0;
+        int r=0;
+        long max=0;
+        long sum=0;
+        int n=nums.length;
+        Map<Integer,Integer> map = new HashMap<>();
+
+        while(r<n){
+            sum+=nums[r];
+            map.put(nums[r], map.getOrDefault(nums[r],0)+1);
+
+            if(r-l+1 > k){
+                sum-=nums[l];
+                map.put(nums[l], map.getOrDefault(nums[l],0)-1);
+                if(map.getOrDefault(nums[l],0) <= 0){
+                    map.remove(nums[l]);
+                }
+                l++;
+            }
+
+            if(r-l+1 == k && map.size() == k){
+                max= Math.max(max,sum);
+            }
+            r++;
+        }
+        return max;
     }
 
     private String minWindowSubstring(String s, String t) {

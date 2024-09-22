@@ -1,6 +1,7 @@
 # JAVA PROBLEMS
 <details>
   <summary>Java 8 Problems</summary>
+
 Execution Class : Java8Problems
 
 1. Given a list of integers, separate odd and even numbers?
@@ -40,6 +41,7 @@ Execution Class : Java8Problems
 
 <details>
   <summary>Solving Real Time Queries Using Java 8 Features - Employee Management System</summary>
+
 Execution Class : EMSservice
 
 1. How many male and female employees are there in the organization?
@@ -62,6 +64,7 @@ Execution Class : EMSservice
 
 <details>
   <summary>DSA- Sliding Window Problems</summary>
+
 Execution Class : SlidingWindow
 
 1. Maximum Points You Can Obtain from Cards
@@ -75,4 +78,6 @@ Execution Class : SlidingWindow
 9. Count number of Nice subarrays
 10. Subarrays with K Different Integers
 11. Minimum Window Substring
+12. Maximum Sum of Distinct Subarrays With Length K
+13. Maximum Length Substring With Two Occurrences
 </details>
