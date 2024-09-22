@@ -59,3 +59,20 @@ Execution Class : EMSservice
 15. Who is the oldest employee in the organization? What is his age and which department does he belong to?
 
 </details>
+
+<details>
+  <summary>DSA- Sliding Window Problems</summary>
+Execution Class : SlidingWindow
+
+1. Maximum Points You Can Obtain from Cards
+2. Longest Substring Without Repeating Characters
+3. Max Consecutive Ones III
+4. Fruits into baskets
+5. Longest Substring With At Most K Distinct Characters
+6. Number of Substrings Containing All Three Characters
+7. Longest Repeating Character Replacement
+8. Binary Subarrays With Sum
+9. Count number of Nice subarrays
+10. Subarrays with K Different Integers
+11. Minimum Window Substring
+</details>
