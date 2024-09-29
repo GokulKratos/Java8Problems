@@ -1,4 +1,4 @@
-package com.dsa.slidingwindow.problems;
+package com.dsa.slidingwindow;
 
 import java.util.Arrays;
 import java.util.HashMap;

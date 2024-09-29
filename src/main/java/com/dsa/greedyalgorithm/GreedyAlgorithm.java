@@ -1,4 +1,4 @@
-package com.advance.coding.questions;
+package com.dsa.greedyalgorithm;
 
 import java.util.Arrays;
 import java.util.Comparator;

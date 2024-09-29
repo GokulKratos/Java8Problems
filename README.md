@@ -81,3 +81,18 @@ Execution Class : SlidingWindow
 12. Maximum Sum of Distinct Subarrays With Length K
 13. Maximum Length Substring With Two Occurrences
 </details>
+
+<details>
+  <summary>DSA - Greedy Algorithm Problems</summary>
+
+Execution Class : GreedyAlgorithm
+
+1. Assign Cookies
+2. Lemonade Change
+3. Shortest Job First (or SJF) CPU Scheduling
+4. Jump Game
+5. Jump Game 2
+6. Job Sequencing Problem
+7. N Meeting in One Room
+8. Non-overlapping Intervals
+</details>
